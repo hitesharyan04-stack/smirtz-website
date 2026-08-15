@@ -4,20 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SMIRTZ — Building What's Next</title>
-<meta name="description" content="SMIRTZ builds the next generation of digital experiences.">
+<title>SMIRTZ — Building What's Next.</title>
+
+<meta name="description" content="SMIRTZ builds digital products that connect people, communities and creativity.">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root{
-  --bg:#030303;
+  --bg:#050505;
+  --card:#0d0d11;
   --text:#f7f7f7;
-  --muted:#888;
+  --muted:#92929b;
   --line:rgba(255,255,255,.09);
-  --purple:#8b5cf6;
-  --purple2:#c084fc;
-  --cyan:#67e8f9;
+  --purple:#9b6cff;
+  --purple2:#c5b1ff;
+  --green:#7cffc4;
 }
 
 *{
@@ -37,137 +39,176 @@ body{
   overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-5;
-  background:
-    radial-gradient(circle at 15% 20%,rgba(139,92,246,.12),transparent 25%),
-    radial-gradient(circle at 85% 30%,rgba(103,232,249,.07),transparent 25%),
-    radial-gradient(circle at 50% 90%,rgba(192,132,252,.08),transparent 30%);
-}
-
-body:after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:100;
-  opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-}
-
 a{
   color:inherit;
   text-decoration:none;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
 
-/* CURSOR GLOW */
-
-.cursor{
-  position:fixed;
-  width:450px;
-  height:450px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(139,92,246,.13),transparent 65%);
-  transform:translate(-50%,-50%);
-  z-index:-1;
+button{
+  cursor:pointer;
 }
 
-/* NAV */
+/* BACKGROUND */
 
-nav{
+body::before{
+  content:"";
   position:fixed;
-  top:16px;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 75% 20%,rgba(126,73,255,.18),transparent 28%),
+    radial-gradient(circle at 10% 80%,rgba(0,255,200,.07),transparent 25%);
+}
+
+.grid{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  opacity:.18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
+}
+
+/* NAVBAR */
+
+.nav-wrap{
+  position:fixed;
+  top:18px;
   left:50%;
   transform:translateX(-50%);
-  width:min(1150px,92%);
+  width:min(1240px,calc(100% - 32px));
+  z-index:1000;
+}
+
+.nav{
   height:64px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
+  padding:0 18px 0 24px;
   border:1px solid var(--line);
   border-radius:22px;
-  background:rgba(8,8,8,.65);
-  backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
-  z-index:1000;
-  box-shadow:0 20px 70px rgba(0,0,0,.35);
+  background:rgba(8,8,10,.72);
+  backdrop-filter:blur(22px);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 .logo{
-  font-weight:900;
   font-size:20px;
-  letter-spacing:5px;
+  font-weight:900;
+  letter-spacing:6px;
 }
 
 .nav-links{
   display:flex;
-  gap:28px;
-  color:#999;
-  font-size:13px;
+  gap:30px;
+  align-items:center;
 }
 
 .nav-links a{
-  transition:.3s;
+  color:#aaa;
+  font-size:13px;
+  font-weight:600;
+  transition:.25s;
 }
 
 .nav-links a:hover{
   color:white;
 }
 
-.nav-cta{
-  padding:10px 17px;
-  border-radius:30px;
+.nav-btn{
+  border:0;
   background:white;
   color:black;
+  padding:12px 19px;
+  border-radius:999px;
   font-size:12px;
   font-weight:800;
-  transition:.3s;
+  transition:.25s;
 }
 
-.nav-cta:hover{
-  transform:scale(1.05);
+.nav-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 10px 35px rgba(255,255,255,.2);
+}
+
+.menu{
+  display:none;
+  border:1px solid var(--line);
+  background:transparent;
+  color:white;
+  padding:9px 12px;
+  border-radius:12px;
 }
 
 /* GENERAL */
 
+section{
+  position:relative;
+}
+
 .container{
-  width:min(1200px,88%);
+  width:min(1180px,calc(100% - 40px));
   margin:auto;
 }
 
-section{
-  position:relative;
-  padding:150px 0;
+.section{
+  padding:130px 0;
 }
 
-.label{
-  color:#777;
+.eyebrow{
+  color:#a7a7b0;
   font-size:11px;
   font-weight:700;
-  letter-spacing:4px;
+  letter-spacing:5px;
   text-transform:uppercase;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 
-.reveal{
-  opacity:0;
-  transform:translateY(50px);
-  transition:1s cubic-bezier(.16,1,.3,1);
+.title{
+  font-size:clamp(45px,7vw,92px);
+  line-height:.95;
+  letter-spacing:-5px;
+  font-weight:900;
 }
 
-.reveal.visible{
-  opacity:1;
-  transform:none;
+.gradient{
+  background:linear-gradient(110deg,#fff 15%,#bca4ff 55%,#8b5cff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+  margin-bottom:60px;
+}
+
+.section-head h2{
+  font-size:clamp(38px,5vw,70px);
+  letter-spacing:-4px;
+  line-height:.98;
+}
+
+.section-head p{
+  max-width:400px;
+  color:#888;
+  line-height:1.7;
 }
 
 /* HERO */
@@ -176,181 +217,117 @@ section{
   min-height:100vh;
   display:flex;
   align-items:center;
+  padding-top:120px;
   overflow:hidden;
-  padding-top:150px;
 }
 
-.hero-grid{
+.hero-glow{
   position:absolute;
-  inset:0;
-  opacity:.13;
-  background-image:
-    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
-  background-size:70px 70px;
-  mask-image:linear-gradient(to bottom,black,transparent 85%);
-}
-
-.orb{
-  position:absolute;
+  width:600px;
+  height:600px;
   border-radius:50%;
-  filter:blur(80px);
-  pointer-events:none;
-}
-
-.orb.one{
-  width:420px;
-  height:420px;
-  background:#6d28d9;
-  opacity:.25;
-  right:-100px;
+  background:radial-gradient(circle,rgba(126,79,255,.24),transparent 65%);
+  right:-150px;
   top:100px;
-  animation:float1 9s ease-in-out infinite;
-}
-
-.orb.two{
-  width:300px;
-  height:300px;
-  background:#0891b2;
-  opacity:.12;
-  left:-100px;
-  bottom:50px;
-  animation:float2 11s ease-in-out infinite;
-}
-
-@keyframes float1{
-  50%{transform:translate(-80px,70px) scale(1.2)}
-}
-
-@keyframes float2{
-  50%{transform:translate(100px,-60px) scale(.8)}
+  filter:blur(10px);
+  animation:float 7s ease-in-out infinite;
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
+  max-width:1050px;
 }
 
 .status{
   display:inline-flex;
   align-items:center;
-  gap:10px;
+  gap:9px;
+  padding:10px 15px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.035);
-  padding:9px 14px;
-  border-radius:50px;
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
   color:#aaa;
   font-size:11px;
-  margin-bottom:30px;
-  animation:appear .8s ease forwards;
+  margin-bottom:28px;
 }
 
-.dot{
+.status-dot{
   width:7px;
   height:7px;
-  background:#8b5cf6;
   border-radius:50%;
-  box-shadow:0 0 15px #8b5cf6;
-  animation:pulse 1.7s infinite;
-}
-
-@keyframes pulse{
-  50%{opacity:.3;transform:scale(.6)}
+  background:#a77aff;
+  box-shadow:0 0 15px #9b6cff;
+  animation:pulse 2s infinite;
 }
 
 .hero h1{
-  max-width:1050px;
-  font-size:clamp(70px,12vw,165px);
+  font-size:clamp(65px,11vw,150px);
   line-height:.82;
   letter-spacing:-9px;
   font-weight:900;
+  max-width:1000px;
 }
 
-.gradient{
-  background:linear-gradient(
-    90deg,
-    #fff 0%,
-    #c4b5fd 35%,
-    #8b5cf6 55%,
-    #fff 80%
-  );
-  background-size:300% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:gradientMove 7s linear infinite;
-}
-
-@keyframes gradientMove{
-  to{background-position:300% center}
-}
-
-.hero-desc{
-  max-width:650px;
-  color:#8f8f8f;
+.hero-text{
+  margin-top:38px;
+  color:#999;
   font-size:18px;
-  line-height:1.8;
-  margin:40px 0;
+  line-height:1.7;
+  max-width:650px;
 }
 
-.buttons{
+.hero-actions{
   display:flex;
+  gap:14px;
+  margin-top:35px;
   flex-wrap:wrap;
-  gap:13px;
 }
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  min-height:52px;
-  padding:0 24px;
-  border-radius:16px;
-  border:1px solid var(--line);
+.primary{
+  border:0;
+  padding:16px 25px;
+  border-radius:999px;
   background:white;
   color:black;
-  font-size:13px;
   font-weight:800;
-  transition:.35s cubic-bezier(.16,1,.3,1);
-}
-
-.btn:hover{
-  transform:translateY(-5px);
-  box-shadow:0 20px 50px rgba(139,92,246,.18);
-}
-
-.btn.dark{
-  background:rgba(255,255,255,.035);
-  color:white;
-}
-
-.arrow{
   transition:.3s;
 }
 
-.btn:hover .arrow{
-  transform:translateX(5px);
+.primary:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 50px rgba(255,255,255,.16);
 }
 
-/* SCROLL INDICATOR */
+.secondary{
+  padding:16px 25px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  color:white;
+  font-weight:700;
+  transition:.3s;
+}
 
-.scroll{
-  position:absolute;
-  bottom:35px;
-  left:0;
-  color:#555;
-  font-size:10px;
-  letter-spacing:3px;
+.secondary:hover{
+  border-color:rgba(255,255,255,.3);
+  transform:translateY(-4px);
+}
+
+.hero-stats{
   display:flex;
-  align-items:center;
-  gap:12px;
+  gap:60px;
+  margin-top:85px;
 }
 
-.scroll-line{
-  width:55px;
-  height:1px;
-  background:#444;
+.stat strong{
+  display:block;
+  font-size:27px;
+}
+
+.stat span{
+  color:#777;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
 }
 
 /* MARQUEE */
@@ -359,303 +336,556 @@ section{
   border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);
   overflow:hidden;
+  padding:20px 0;
   white-space:nowrap;
-  padding:22px 0;
 }
 
 .marquee-track{
-  display:inline-block;
-  animation:marquee 25s linear infinite;
+  display:inline-flex;
+  gap:50px;
+  animation:marquee 22s linear infinite;
 }
 
 .marquee span{
-  font-size:12px;
-  letter-spacing:5px;
   color:#555;
-  margin-right:50px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:4px;
 }
 
-@keyframes marquee{
-  to{transform:translateX(-50%)}
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  min-height:250px;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:25px;
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  transition:.35s;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(145,94,255,.12);
+  filter:blur(50px);
+  right:-80px;
+  top:-80px;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(169,130,255,.35);
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.card-number{
+  color:#666;
+  font-size:12px;
+  margin-bottom:70px;
+}
+
+.card h3{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#777;
+  line-height:1.7;
+  font-size:14px;
 }
 
 /* FEEDZ */
 
 .feedz-section{
-  background:
-    radial-gradient(circle at 70% 40%,rgba(139,92,246,.12),transparent 35%);
+  overflow:hidden;
 }
 
 .feedz-box{
-  position:relative;
-  min-height:650px;
   border:1px solid var(--line);
-  border-radius:40px;
-  padding:70px;
-  overflow:hidden;
+  border-radius:35px;
+  padding:60px;
   background:
-    linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.015));
-  box-shadow:inset 0 1px rgba(255,255,255,.06);
-}
-
-.feedz-box:before{
-  content:"";
-  position:absolute;
-  width:500px;
-  height:500px;
-  right:-180px;
-  bottom:-200px;
-  background:#7c3aed;
-  filter:blur(130px);
-  opacity:.25;
-}
-
-.feedz-heading{
+    radial-gradient(circle at 80% 20%,rgba(145,86,255,.2),transparent 35%),
+    linear-gradient(135deg,#0c0b11,#080808);
   position:relative;
-  z-index:2;
-  font-size:clamp(80px,13vw,170px);
-  line-height:.8;
-  letter-spacing:-9px;
+}
+
+.feedz-logo{
+  font-size:clamp(65px,10vw,130px);
   font-weight:900;
+  letter-spacing:-7px;
 }
 
-.feedz-copy{
-  position:relative;
-  z-index:2;
-  max-width:600px;
-  margin:35px 0;
+.feedz-description{
+  max-width:650px;
   color:#999;
-  font-size:20px;
+  font-size:18px;
+  line-height:1.7;
+  margin-top:20px;
+}
+
+.feature-grid{
+  margin-top:55px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.feature{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  background:rgba(255,255,255,.025);
+}
+
+.feature-icon{
+  font-size:25px;
+  margin-bottom:20px;
+}
+
+.feature h4{
+  margin-bottom:7px;
+}
+
+.feature p{
+  color:#777;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* VISION */
+
+.vision{
+  min-height:600px;
+  display:flex;
+  align-items:center;
+}
+
+.vision-text{
+  max-width:900px;
+}
+
+.vision-text h2{
+  font-size:clamp(48px,7vw,100px);
+  line-height:.95;
+  letter-spacing:-6px;
+}
+
+.vision-text p{
+  color:#888;
+  max-width:650px;
+  font-size:18px;
+  line-height:1.8;
+  margin-top:35px;
+}
+
+/* TECHNOLOGY */
+
+.tech-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.tech{
+  padding:35px;
+  min-height:230px;
+  border:1px solid var(--line);
+  border-radius:25px;
+  background:#0a0a0c;
+}
+
+.tech span{
+  color:#8f65ff;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.tech h3{
+  margin:30px 0 12px;
+  font-size:27px;
+}
+
+.tech p{
+  color:#777;
   line-height:1.7;
 }
 
-.tags{
-  position:relative;
-  z-index:2;
+/* ECOSYSTEM */
+
+.ecosystem{
   display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-bottom:35px;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
 }
 
-.tag{
-  padding:9px 14px;
-  border:1px solid var(--line);
-  border-radius:50px;
-  color:#aaa;
-  background:rgba(255,255,255,.025);
-  font-size:11px;
-  transition:.3s;
-}
-
-.tag:hover{
-  color:white;
-  border-color:rgba(139,92,246,.5);
-  transform:translateY(-3px);
-}
-
-/* PHONE MOCKUP */
-
-.phone{
-  position:absolute;
-  right:80px;
-  top:100px;
-  width:230px;
-  height:450px;
-  border:7px solid #181818;
-  border-radius:35px;
-  background:#080808;
-  box-shadow:
-    0 50px 100px rgba(0,0,0,.7),
-    0 0 60px rgba(139,92,246,.15);
-  transform:rotate(7deg);
-  animation:phoneFloat 5s ease-in-out infinite;
-  overflow:hidden;
-}
-
-@keyframes phoneFloat{
-  50%{transform:rotate(4deg) translateY(-18px)}
-}
-
-.phone-top{
-  height:35px;
-  border-bottom:1px solid #222;
-}
-
-.phone-feed{
-  padding:12px;
-}
-
-.post{
-  height:135px;
-  border-radius:17px;
-  margin-bottom:10px;
-  background:linear-gradient(135deg,#312e81,#7c3aed,#111);
-  position:relative;
-  overflow:hidden;
-}
-
-.post:nth-child(2){
-  background:linear-gradient(135deg,#164e63,#0e7490,#111);
-}
-
-.post:nth-child(3){
-  background:linear-gradient(135deg,#4c1d95,#be185d,#111);
-}
-
-.post:after{
-  content:"FEEDZ";
-  position:absolute;
-  bottom:10px;
-  left:12px;
+.eco-main{
+  width:250px;
+  height:90px;
+  border:1px solid rgba(164,121,255,.4);
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
   font-weight:900;
+  letter-spacing:5px;
+  background:rgba(155,108,255,.08);
+  box-shadow:0 0 80px rgba(155,108,255,.12);
+}
+
+.eco-arrow{
+  color:#555;
+  font-size:25px;
+}
+
+.eco-product{
+  width:310px;
+  height:100px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:900;
+  background:#0d0d10;
+}
+
+.eco-items{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.eco-items span{
+  padding:12px 17px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:#888;
   font-size:12px;
+}
+
+/* ROADMAP */
+
+.roadmap{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.road{
+  border-top:1px solid #333;
+  padding-top:25px;
+}
+
+.road-year{
+  color:#a477ff;
+  font-size:13px;
+  font-weight:800;
+}
+
+.road h3{
+  margin:18px 0 10px;
+  font-size:22px;
+}
+
+.road p{
+  color:#777;
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* CAREERS */
+
+.career-box{
+  padding:70px;
+  border-radius:30px;
+  border:1px solid var(--line);
+  background:linear-gradient(120deg,#0d0d0f,#171025);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+}
+
+.career-box h2{
+  font-size:clamp(40px,5vw,70px);
+  letter-spacing:-4px;
 }
 
 /* WAITLIST */
 
 .waitlist{
-  text-align:center;
+  padding:140px 0;
 }
 
-.waitlist-card{
+.waitlist-box{
+  text-align:center;
   max-width:850px;
   margin:auto;
-  padding:80px 50px;
-  border:1px solid var(--line);
-  border-radius:40px;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(139,92,246,.15),transparent 45%),
-    rgba(255,255,255,.025);
 }
 
 .waitlist h2{
-  font-size:clamp(50px,8vw,100px);
+  font-size:clamp(55px,8vw,105px);
+  letter-spacing:-7px;
   line-height:.9;
-  letter-spacing:-5px;
-  margin-bottom:30px;
 }
 
 .waitlist p{
-  color:#888;
+  color:#777;
+  margin:30px auto;
   max-width:550px;
-  margin:0 auto 35px;
   line-height:1.7;
 }
 
-.fake-form{
+.wait-form{
   display:flex;
-  max-width:550px;
-  margin:auto;
-  padding:6px;
+  max-width:620px;
+  margin:35px auto 0;
+  padding:7px;
   border:1px solid var(--line);
-  border-radius:18px;
-  background:#080808;
+  border-radius:999px;
+  background:#0b0b0d;
 }
 
-.fake-form input{
-  min-width:0;
+.wait-form input{
   flex:1;
+  min-width:0;
   border:0;
   outline:0;
   background:transparent;
   color:white;
-  padding:15px;
+  padding:14px 20px;
 }
 
-.fake-form button{
+.wait-form button{
   border:0;
-  border-radius:13px;
-  padding:0 20px;
   background:white;
   color:black;
+  padding:14px 24px;
+  border-radius:999px;
   font-weight:800;
-  cursor:pointer;
 }
 
-/* REGISTER */
-
-.register-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
-}
-
-.register-card{
-  border:1px solid var(--line);
-  border-radius:30px;
-  padding:45px;
-  background:rgba(255,255,255,.025);
-  transition:.5s cubic-bezier(.16,1,.3,1);
-}
-
-.register-card:hover{
-  transform:translateY(-8px);
-  border-color:rgba(139,92,246,.3);
-}
-
-.register-card h3{
-  font-size:35px;
-  margin-bottom:15px;
-}
-
-.register-card p{
-  color:#888;
-  line-height:1.7;
-  margin-bottom:30px;
-}
-
-/* ABOUT */
-
-.about{
-  max-width:950px;
-}
-
-.about h2{
-  font-size:clamp(48px,7vw,95px);
-  line-height:.95;
-  letter-spacing:-5px;
-  margin-bottom:35px;
-}
-
-.about p{
-  color:#888;
-  font-size:20px;
-  line-height:1.8;
+.success{
+  display:none;
+  color:var(--green);
+  margin-top:18px;
+  font-size:13px;
 }
 
 /* FOOTER */
 
 footer{
   border-top:1px solid var(--line);
-  padding:50px 0;
+  padding:70px 0 30px;
 }
 
-.footer-inner{
-  width:min(1200px,88%);
-  margin:auto;
+.footer-top{
   display:flex;
   justify-content:space-between;
-  gap:20px;
-  color:#555;
-  font-size:12px;
+  gap:40px;
 }
 
 .footer-logo{
-  color:white;
-  letter-spacing:4px;
+  font-size:28px;
   font-weight:900;
+  letter-spacing:6px;
 }
 
-/* MOBILE */
+.footer-description{
+  max-width:330px;
+  color:#666;
+  line-height:1.7;
+  margin-top:15px;
+}
+
+.footer-links{
+  display:flex;
+  gap:60px;
+}
+
+.footer-column h4{
+  margin-bottom:18px;
+  font-size:12px;
+  color:white;
+}
+
+.footer-column a{
+  display:block;
+  color:#666;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.footer-column a:hover{
+  color:white;
+}
+
+.footer-bottom{
+  border-top:1px solid var(--line);
+  margin-top:60px;
+  padding-top:22px;
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  font-size:11px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(15px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  width:min(450px,100%);
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:35px;
+  background:#0d0d10;
+  box-shadow:0 30px 100px rgba(0,0,0,.7);
+  animation:modalIn .3s ease;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:20px;
+  top:18px;
+  border:0;
+  background:#17171a;
+  color:#aaa;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+}
+
+.modal-box h2{
+  font-size:35px;
+  letter-spacing:-2px;
+}
+
+.modal-box p{
+  color:#777;
+  font-size:13px;
+  line-height:1.6;
+  margin:10px 0 25px;
+}
+
+.form-group{
+  margin-bottom:14px;
+}
+
+.form-group label{
+  display:block;
+  color:#888;
+  font-size:11px;
+  margin-bottom:7px;
+}
+
+.form-group input{
+  width:100%;
+  border:1px solid var(--line);
+  background:#08080a;
+  color:white;
+  outline:none;
+  padding:14px;
+  border-radius:13px;
+}
+
+.form-group input:focus{
+  border-color:#8058ff;
+}
+
+.form-submit{
+  width:100%;
+  border:0;
+  padding:15px;
+  border-radius:14px;
+  background:white;
+  color:black;
+  font-weight:800;
+  margin-top:8px;
+}
+
+/* SCROLL ANIMATION */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ANIMATIONS */
+
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-30px) scale(1.08)}
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.5)}
+}
+
+@keyframes marquee{
+  to{transform:translateX(-50%)}
+}
+
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(20px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* RESPONSIVE */
 
 @media(max-width:850px){
 
-  nav{
-    width:94%;
+  .nav-links{
+    display:none;
   }
 
-  .nav-links{
+  .menu{
+    display:block;
+  }
+
+  .nav-btn{
     display:none;
   }
 
@@ -663,77 +893,89 @@ footer{
     letter-spacing:-5px;
   }
 
-  .feedz-box{
-    padding:45px 28px;
-  }
-
-  .phone{
-    position:relative;
-    right:auto;
-    top:auto;
-    margin:60px auto 0;
-    transform:rotate(4deg);
-  }
-
-  .register-grid{
+  .cards,
+  .feature-grid,
+  .tech-grid{
     grid-template-columns:1fr;
+  }
+
+  .roadmap{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .section{
+    padding:90px 0;
+  }
+
+  .feedz-box{
+    padding:35px 25px;
+  }
+
+  .career-box{
+    padding:40px 25px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .footer-top{
+    flex-direction:column;
+  }
+
+  .footer-links{
+    flex-wrap:wrap;
+    gap:35px;
   }
 }
 
-@media(max-width:600px){
+@media(max-width:550px){
 
-  section{
-    padding:100px 0;
+  .container{
+    width:min(100% - 28px,1180px);
   }
 
   .hero{
-    min-height:900px;
+    min-height:850px;
   }
 
   .hero h1{
-    font-size:70px;
+    font-size:65px;
   }
 
-  .hero-desc{
-    font-size:16px;
+  .hero-stats{
+    gap:25px;
+    flex-wrap:wrap;
   }
 
-  .buttons{
+  .section-head{
     flex-direction:column;
+    align-items:flex-start;
   }
 
-  .btn{
+  .roadmap{
+    grid-template-columns:1fr;
+  }
+
+  .wait-form{
+    border-radius:20px;
+    flex-direction:column;
+    border:0;
+    background:transparent;
+    gap:10px;
+  }
+
+  .wait-form input{
+    border:1px solid var(--line);
+    border-radius:15px;
+    background:#0b0b0d;
+  }
+
+  .wait-form button{
     width:100%;
   }
 
-  .waitlist-card{
-    padding:55px 20px;
-  }
-
-  .waitlist h2{
-    letter-spacing:-3px;
-  }
-
-  .fake-form{
+  .footer-bottom{
     flex-direction:column;
-    gap:7px;
-    padding:7px;
-  }
-
-  .fake-form button{
-    height:50px;
-  }
-
-  .register-card{
-    padding:30px;
-  }
-
-  .about h2{
-    letter-spacing:-3px;
-  }
-
-  .footer-inner{
-    flex-direction:column;
+    gap:10px;
   }
 }
 </style>
@@ -741,169 +983,600 @@ footer{
 
 <body>
 
-<div class="cursor"></div>
+<div class="grid"></div>
 
-<!-- NAV -->
+<!-- NAVIGATION -->
 
-<nav>
+<div class="nav-wrap">
+<nav class="nav">
 
-  <a class="logo" href="#">SMIRTZ</a>
+<a href="#top" class="logo">SMIRTZ</a>
 
-  <div class="nav-links">
-    <a href="#feedz">FEEDZ</a>
-    <a href="#waitlist">WAITLIST</a>
-    <a href="#about">ABOUT</a>
-  </div>
+<div class="nav-links">
+<a href="#products">PRODUCTS</a>
+<a href="#vision">VISION</a>
+<a href="#technology">TECHNOLOGY</a>
+<a href="#roadmap">ROADMAP</a>
+<a href="#careers">CAREERS</a>
+</div>
 
-  <a class="nav-cta" href="#register">
-    JOIN FEEDZ
-  </a>
+<button class="nav-btn" onclick="openRegister()">
+JOIN FEEDZ
+</button>
+
+<button class="menu">MENU</button>
 
 </nav>
+</div>
 
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero" id="top">
 
-  <div class="hero-grid"></div>
+<div class="hero-glow"></div>
 
-  <div class="orb one"></div>
-  <div class="orb two"></div>
+<div class="container">
 
-  <div class="container">
+<div class="hero-content reveal">
 
-    <div class="hero-content">
+<div class="status">
+<span class="status-dot"></span>
+SMIRTZ IS BUILDING
+</div>
 
-      <div class="status">
-        <span class="dot"></span>
-        SMIRTZ IS BUILDING
-      </div>
+<div class="eyebrow">
+TECHNOLOGY COMPANY
+</div>
 
-      <div class="label">
-        TECHNOLOGY COMPANY
-      </div>
+<h1>
+BUILDING<br>
+<span class="gradient">WHAT'S NEXT.</span>
+</h1>
 
-      <h1>
-        BUILDING<br>
-        <span class="gradient">WHAT'S NEXT.</span>
-      </h1>
+<p class="hero-text">
+SMIRTZ builds digital products designed to connect people,
+communities and creativity — creating experiences for the next
+generation of the internet.
+</p>
 
-      <p class="hero-desc">
-        We build digital products designed to connect
-        people, communities and creativity in completely
-        new ways.
-      </p>
+<div class="hero-actions">
 
-      <div class="buttons">
+<a href="#feedz" class="primary">
+EXPLORE FEEDZ →
+</a>
 
-        <a class="btn" href="#feedz">
-          EXPLORE FEEDZ
-          <span class="arrow">→</span>
-        </a>
+<button class="secondary" onclick="scrollToWaitlist()">
+JOIN THE WAITLIST
+</button>
 
-        <a class="btn dark" href="#waitlist">
-          JOIN WAITLIST
-        </a>
+</div>
 
-      </div>
+<div class="hero-stats">
 
-    </div>
+<div class="stat">
+<strong>01</strong>
+<span>Product</span>
+</div>
 
-    <div class="scroll">
-      <span class="scroll-line"></span>
-      SCROLL TO EXPLORE
-    </div>
+<div class="stat">
+<strong>∞</strong>
+<span>Possibilities</span>
+</div>
 
-  </div>
+<div class="stat">
+<strong>2026</strong>
+<span>Foundation</span>
+</div>
 
+</div>
+
+</div>
+
+</div>
 </section>
 
 
 <!-- MARQUEE -->
 
 <div class="marquee">
+<div class="marquee-track">
 
-  <div class="marquee-track">
-
-    <span>SMIRTZ</span>
-    <span>BUILD</span>
-    <span>CREATE</span>
-    <span>CONNECT</span>
-    <span>DISCOVER</span>
-    <span>FEEDZ</span>
-
-    <span>SMIRTZ</span>
-    <span>BUILD</span>
-    <span>CREATE</span>
-    <span>CONNECT</span>
-    <span>DISCOVER</span>
-    <span>FEEDZ</span>
-
-  </div>
+<span>SMIRTZ</span>
+<span>•</span>
+<span>BUILD THE FUTURE</span>
+<span>•</span>
+<span>FEEDZ</span>
+<span>•</span>
+<span>COMMUNITIES</span>
+<span>•</span>
+<span>CREATORS</span>
+<span>•</span>
+<span>SMIRTZ</span>
+<span>•</span>
+<span>BUILD THE FUTURE</span>
+<span>•</span>
+<span>FEEDZ</span>
+<span>•</span>
+<span>COMMUNITIES</span>
+<span>•</span>
+<span>CREATORS</span>
+<span>•</span>
 
 </div>
+</div>
+
+
+<!-- COMPANY -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+<div class="eyebrow">THE COMPANY</div>
+<h2>More than<br><span class="gradient">one product.</span></h2>
+</div>
+
+<p>
+SMIRTZ is being built as a technology company focused on
+creating products that make the internet more connected,
+creative and community-driven.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card reveal">
+<div class="card-number">01 / MISSION</div>
+<h3>Connect people.</h3>
+<p>
+Create experiences that help people discover,
+communicate and build meaningful communities.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">02 / CREATIVITY</div>
+<h3>Empower creators.</h3>
+<p>
+Give creators the tools to publish, grow,
+communicate and build their own audiences.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">03 / FUTURE</div>
+<h3>Build what's next.</h3>
+<p>
+Explore new ways people can interact with
+content, communities and technology.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
 
 
 <!-- FEEDZ -->
 
-<section class="feedz-section" id="feedz">
+<section class="section feedz-section" id="feedz">
 
-  <div class="container">
+<div class="container">
 
-    <div class="label reveal">
-      OUR FIRST PRODUCT
-    </div>
+<div class="feedz-box reveal">
 
-    <div class="feedz-box reveal">
+<div class="eyebrow">SMIRTZ PRODUCT 001</div>
 
-      <div class="feedz-heading">
-        FEEDZ
-      </div>
+<div class="feedz-logo gradient">
+FEEDZ
+</div>
 
-      <p class="feedz-copy">
-        One place. Every community.
-        Feedz brings videos, creators,
-        social interaction, discussions
-        and communities together.
-      </p>
+<p class="feedz-description">
+One platform for videos, social interaction, communities,
+discussions and discovery. Feedz brings different parts of
+the internet into one connected experience.
+</p>
 
-      <div class="tags">
+<div class="hero-actions">
 
-        <span class="tag">VIDEOS</span>
-        <span class="tag">CREATORS</span>
-        <span class="tag">SOCIAL</span>
-        <span class="tag">COMMUNITIES</span>
-        <span class="tag">DISCUSSIONS</span>
+<button class="primary" onclick="openRegister()">
+JOIN FEEDZ →
+</button>
 
-      </div>
+<button class="secondary" onclick="scrollToWaitlist()">
+GET EARLY ACCESS
+</button>
 
-      <a class="btn" href="#waitlist">
-        GET EARLY ACCESS
-        <span class="arrow">→</span>
-      </a>
+</div>
+
+<div class="feature-grid">
+
+<div class="feature">
+<div class="feature-icon">▶</div>
+<h4>VIDEO</h4>
+<p>Watch, upload and discover content from creators.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">◎</div>
+<h4>SOCIAL</h4>
+<p>Profiles, posts, follows, reactions and sharing.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">◉</div>
+<h4>COMMUNITIES</h4>
+<p>Create spaces around interests and ideas.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">✦</div>
+<h4>DISCOVERY</h4>
+<p>Find content and people you actually care about.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">↯</div>
+<h4>MESSAGING</h4>
+<p>Connect directly with friends and communities.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">#</div>
+<h4>DISCUSSIONS</h4>
+<p>Share opinions, conversations and ideas.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
 
 
-      <!-- APP MOCKUP -->
+<!-- ECOSYSTEM -->
 
-      <div class="phone">
+<section class="section" id="products">
 
-        <div class="phone-top"></div>
+<div class="container">
 
-        <div class="phone-feed">
+<div class="section-head reveal">
 
-          <div class="post"></div>
-          <div class="post"></div>
-          <div class="post"></div>
+<div>
+<div class="eyebrow">ECOSYSTEM</div>
+<h2>One company.<br><span class="gradient">Many possibilities.</span></h2>
+</div>
 
-        </div>
+<p>
+Feedz is the beginning. SMIRTZ is designed to become
+an ecosystem of digital products over time.
+</p>
 
-      </div>
+</div>
 
-    </div>
+<div class="ecosystem reveal">
 
-  </div>
+<div class="eco-main">SMIRTZ</div>
 
+<div class="eco-arrow">↓</div>
+
+<div class="eco-product">
+FEEDZ
+</div>
+
+<div class="eco-arrow">↓</div>
+
+<div class="eco-items">
+<span>CREATORS</span>
+<span>COMMUNITIES</span>
+<span>VIDEOS</span>
+<span>MESSAGING</span>
+<span>DISCOVERY</span>
+<span>DISCUSSIONS</span>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- VISION -->
+
+<section class="section vision" id="vision">
+
+<div class="container">
+
+<div class="vision-text reveal">
+
+<div class="eyebrow">OUR VISION</div>
+
+<h2>
+THE INTERNET<br>
+SHOULDN'T FEEL<br>
+<span class="gradient">FRAGMENTED.</span>
+</h2>
+
+<p>
+People currently jump between different platforms to watch
+videos, talk to friends, join communities, discover creators
+and share ideas. SMIRTZ wants to explore what happens when
+those experiences can live together.
+</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- TECHNOLOGY -->
+
+<section class="section" id="technology">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+<div class="eyebrow">TECHNOLOGY</div>
+<h2>Built for the<br><span class="gradient">next generation.</span></h2>
+</div>
+
+<p>
+The products we build will combine modern infrastructure,
+intelligent systems and user-focused design.
+</p>
+
+</div>
+
+<div class="tech-grid">
+
+<div class="tech reveal">
+<span>01 / AI</span>
+<h3>Intelligent discovery</h3>
+<p>
+Personalized systems designed to help people discover
+content, creators and communities relevant to them.
+</p>
+</div>
+
+<div class="tech reveal">
+<span>02 / REAL-TIME</span>
+<h3>Connected experiences</h3>
+<p>
+Real-time communication and interactions designed
+for modern online communities.
+</p>
+</div>
+
+<div class="tech reveal">
+<span>03 / INFRASTRUCTURE</span>
+<h3>Built to scale</h3>
+<p>
+A technology foundation designed to support millions
+of users and large amounts of content.
+</p>
+</div>
+
+<div class="tech reveal">
+<span>04 / SAFETY</span>
+<h3>Responsible platforms</h3>
+<p>
+Safety, moderation and privacy should be fundamental
+parts of every product we build.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CREATOR -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+<div class="eyebrow">FOR CREATORS</div>
+<h2>CREATE.<br><span class="gradient">GROW.</span></h2>
+</div>
+
+<p>
+Feedz is designed with creators in mind — giving them
+more ways to publish, interact and build communities.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card reveal">
+<div class="card-number">CREATOR 01</div>
+<h3>Publish</h3>
+<p>
+Short-form and long-form content designed for
+different types of creators.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">CREATOR 02</div>
+<h3>Community</h3>
+<p>
+Build an audience that can become an actual community.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">CREATOR 03</div>
+<h3>Analytics</h3>
+<p>
+Understand your audience and learn what resonates.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- COMMUNITY -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+<div class="eyebrow">FOR COMMUNITIES</div>
+<h2>FIND YOUR<br><span class="gradient">PEOPLE.</span></h2>
+</div>
+
+<p>
+Communities should be places where people can share,
+discuss and create together.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card reveal">
+<div class="card-number">COMMUNITY 01</div>
+<h3>Interest spaces</h3>
+<p>
+Create communities around gaming, music, anime,
+sports, technology and everything else.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">COMMUNITY 02</div>
+<h3>Conversations</h3>
+<p>
+Posts, discussions, replies and reactions built
+around community interaction.
+</p>
+</div>
+
+<div class="card reveal">
+<div class="card-number">COMMUNITY 03</div>
+<h3>Connections</h3>
+<p>
+Meet people who share the same interests and ideas.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ROADMAP -->
+
+<section class="section" id="roadmap">
+
+<div class="container">
+
+<div class="section-head reveal">
+
+<div>
+<div class="eyebrow">ROADMAP</div>
+<h2>The journey<br><span class="gradient">starts here.</span></h2>
+</div>
+
+<p>
+SMIRTZ is starting small and building toward something much bigger.
+</p>
+
+</div>
+
+<div class="roadmap">
+
+<div class="road reveal">
+<div class="road-year">2026</div>
+<h3>Foundation</h3>
+<p>
+SMIRTZ identity, website, Feedz concept,
+prototype and early community.
+</p>
+</div>
+
+<div class="road reveal">
+<div class="road-year">2027</div>
+<h3>Launch</h3>
+<p>
+Launch the first public version of Feedz
+and begin building the creator ecosystem.
+</p>
+</div>
+
+<div class="road reveal">
+<div class="road-year">2028</div>
+<h3>Expansion</h3>
+<p>
+New creator tools, communities, discovery
+systems and platform features.
+</p>
+</div>
+
+<div class="road reveal">
+<div class="road-year">2029+</div>
+<h3>Scale</h3>
+<p>
+Expand the SMIRTZ ecosystem and explore
+new digital products.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CAREERS -->
+
+<section class="section" id="careers">
+
+<div class="container">
+
+<div class="career-box reveal">
+
+<div>
+
+<div class="eyebrow">CAREERS</div>
+
+<h2>
+BUILD IT<br>
+WITH US.
+</h2>
+
+</div>
+
+<button class="primary" onclick="alert('SMIRTZ careers are coming soon.')">
+CAREERS →
+</button>
+
+</div>
+
+</div>
 </section>
 
 
@@ -911,134 +1584,46 @@ footer{
 
 <section class="waitlist" id="waitlist">
 
-  <div class="container">
+<div class="container">
 
-    <div class="waitlist-card reveal">
+<div class="waitlist-box reveal">
 
-      <div class="label">
-        FEEDZ IS COMING
-      </div>
+<div class="eyebrow">
+FEEDZ EARLY ACCESS
+</div>
 
-      <h2>
-        BE THERE<br>
-        FROM DAY ONE.
-      </h2>
+<h2>
+BE FIRST<br>
+<span class="gradient">IN.</span>
+</h2>
 
-      <p>
-        Join the early-access list and be among
-        the first people to experience FEEDZ.
-      </p>
+<p>
+Join the early-access list and be among the first people
+to experience Feedz when it launches.
+</p>
 
-      <div class="fake-form">
+<form class="wait-form" id="waitlistForm">
 
-        <input
-          type="email"
-          placeholder="Enter your email"
-          id="email"
-        >
+<input
+type="email"
+id="waitEmail"
+placeholder="Enter your email"
+required
+>
 
-        <button onclick="joinWaitlist()">
-          JOIN →
-        </button>
+<button type="submit">
+JOIN WAITLIST
+</button>
 
-      </div>
+</form>
 
-      <p id="message"
-         style="margin-top:15px;font-size:13px;">
-      </p>
+<div class="success" id="waitSuccess">
+✓ You're on the SMIRTZ / Feedz waitlist.
+</div>
 
-    </div>
+</div>
 
-  </div>
-
-</section>
-
-
-<!-- REGISTER -->
-
-<section id="register">
-
-  <div class="container">
-
-    <div class="label reveal">
-      YOUR NEXT SOCIAL PLATFORM
-    </div>
-
-    <div class="register-grid">
-
-      <div class="register-card reveal">
-
-        <h3>
-          CREATE.
-        </h3>
-
-        <p>
-          Share videos, posts, ideas and
-          moments with the people who
-          actually care about them.
-        </p>
-
-        <a class="btn" href="#waitlist">
-          GET EARLY ACCESS →
-        </a>
-
-      </div>
-
-
-      <div class="register-card reveal">
-
-        <h3>
-          CONNECT.
-        </h3>
-
-        <p>
-          Find communities, creators and
-          conversations that match your
-          interests.
-        </p>
-
-        <a class="btn dark" href="#waitlist">
-          JOIN FEEDZ →
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-  <div class="container">
-
-    <div class="label reveal">
-      ABOUT SMIRTZ
-    </div>
-
-    <div class="about reveal">
-
-      <h2>
-        THE INTERNET
-        SHOULD FEEL
-        MORE HUMAN.
-      </h2>
-
-      <p>
-        SMIRTZ is a technology company focused
-        on building products that make digital
-        experiences more creative, social and
-        meaningful.
-      </p>
-
-    </div>
-
-  </div>
-
+</div>
 </section>
 
 
@@ -1046,98 +1631,316 @@ footer{
 
 <footer>
 
-  <div class="footer-inner">
+<div class="container">
 
-    <div class="footer-logo">
-      SMIRTZ
-    </div>
+<div class="footer-top">
 
-    <div>
-      © 2026 SMIRTZ. Building what's next.
-    </div>
+<div>
 
-  </div>
+<div class="footer-logo">SMIRTZ</div>
+
+<p class="footer-description">
+Building digital products that connect people,
+communities and creativity.
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<div class="footer-column">
+
+<h4>PRODUCT</h4>
+
+<a href="#feedz">Feedz</a>
+<a href="#waitlist">Waitlist</a>
+<a href="#products">Ecosystem</a>
+
+</div>
+
+<div class="footer-column">
+
+<h4>COMPANY</h4>
+
+<a href="#vision">Vision</a>
+<a href="#technology">Technology</a>
+<a href="#careers">Careers</a>
+
+</div>
+
+<div class="footer-column">
+
+<h4>CONNECT</h4>
+
+<a href="mailto:hello@smirtz.com">Email</a>
+<a href="#" onclick="openRegister();return false;">Register</a>
+<a href="#" onclick="openLogin();return false;">Login</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<span>© 2026 SMIRTZ. ALL RIGHTS RESERVED.</span>
+
+<span>BUILDING WHAT'S NEXT.</span>
+
+</div>
+
+</div>
 
 </footer>
 
 
+<!-- REGISTER MODAL -->
+
+<div class="modal" id="registerModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>Create your<br><span class="gradient">SMIRTZ ID.</span></h2>
+
+<p>
+Create a demo account for the upcoming Feedz platform.
+</p>
+
+<form id="registerForm">
+
+<div class="form-group">
+<label>USERNAME</label>
+<input id="regUsername" type="text" placeholder="@username" required>
+</div>
+
+<div class="form-group">
+<label>EMAIL</label>
+<input id="regEmail" type="email" placeholder="you@example.com" required>
+</div>
+
+<div class="form-group">
+<label>PASSWORD</label>
+<input id="regPassword" type="password" placeholder="••••••••" required>
+</div>
+
+<button class="form-submit" type="submit">
+CREATE SMIRTZ ID →
+</button>
+
+</form>
+
+<div class="success" id="registerSuccess">
+✓ Demo account created successfully.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LOGIN MODAL -->
+
+<div class="modal" id="loginModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModals()">×</button>
+
+<h2>Welcome<br><span class="gradient">back.</span></h2>
+
+<p>
+Login UI for the upcoming Feedz platform.
+</p>
+
+<form id="loginForm">
+
+<div class="form-group">
+<label>EMAIL</label>
+<input type="email" placeholder="you@example.com" required>
+</div>
+
+<div class="form-group">
+<label>PASSWORD</label>
+<input type="password" placeholder="••••••••" required>
+</div>
+
+<button class="form-submit" type="submit">
+LOGIN →
+</button>
+
+</form>
+
+<div class="success" id="loginSuccess">
+✓ Demo login successful.
+</div>
+
+</div>
+
+</div>
+
+
 <script>
 
-/* MOUSE GLOW */
+/* SCROLL REVEAL */
 
-const cursor = document.querySelector(".cursor");
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{
+  threshold:.12
+});
 
-document.addEventListener("mousemove", e => {
+document.querySelectorAll(".reveal").forEach(el=>{
+  observer.observe(el);
+});
 
-  cursor.animate({
-    left: e.clientX + "px",
-    top: e.clientY + "px"
-  },{
-    duration:700,
-    fill:"forwards"
+
+/* WAITLIST */
+
+function scrollToWaitlist(){
+  document.getElementById("waitlist").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+document.getElementById("waitlistForm").addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  const email=document.getElementById("waitEmail").value;
+
+  localStorage.setItem(
+    "smirtz_waitlist_email",
+    email
+  );
+
+  document.getElementById("waitSuccess").style.display="block";
+
+  document.getElementById("waitEmail").value="";
+
+});
+
+
+/* REGISTER */
+
+function openRegister(){
+
+  document.getElementById("registerModal")
+  .classList.add("active");
+
+}
+
+function openLogin(){
+
+  document.getElementById("loginModal")
+  .classList.add("active");
+
+}
+
+function closeModals(){
+
+  document.querySelectorAll(".modal")
+  .forEach(modal=>{
+    modal.classList.remove("active");
+  });
+
+}
+
+
+document.getElementById("registerForm")
+.addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  const username=
+    document.getElementById("regUsername").value;
+
+  const email=
+    document.getElementById("regEmail").value;
+
+  localStorage.setItem(
+    "smirtz_demo_user",
+    JSON.stringify({
+      username:username,
+      email:email
+    })
+  );
+
+  document.getElementById("registerSuccess")
+  .style.display="block";
+
+});
+
+
+/* LOGIN */
+
+document.getElementById("loginForm")
+.addEventListener("submit",(e)=>{
+
+  e.preventDefault();
+
+  document.getElementById("loginSuccess")
+  .style.display="block";
+
+});
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+  modal.addEventListener("click",(e)=>{
+
+    if(e.target===modal){
+      closeModals();
+    }
+
   });
 
 });
 
 
-/* SCROLL REVEALS */
+/* ESCAPE KEY */
 
-const observer = new IntersectionObserver(
-  entries => {
+document.addEventListener("keydown",(e)=>{
 
-    entries.forEach(entry => {
-
-      if(entry.isIntersecting){
-
-        entry.target.classList.add("visible");
-
-      }
-
-    });
-
-  },
-  {
-    threshold:.12
-  }
-);
-
-document
-  .querySelectorAll(".reveal")
-  .forEach(el => observer.observe(el));
-
-
-/* WAITLIST DEMO */
-
-function joinWaitlist(){
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const message =
-    document.getElementById("message");
-
-  if(!email){
-
-    message.textContent =
-      "Please enter your email.";
-
-    return;
+  if(e.key==="Escape"){
+    closeModals();
   }
 
-  if(!email.includes("@")){
+});
 
-    message.textContent =
-      "Please enter a valid email.";
 
-    return;
+/* SIMPLE MOBILE MENU */
+
+document.querySelector(".menu")
+.addEventListener("click",()=>{
+
+  const links=document.querySelector(".nav-links");
+
+  if(links.style.display==="flex"){
+    links.style.display="";
+  }else{
+    links.style.display="flex";
+    links.style.position="absolute";
+    links.style.top="75px";
+    links.style.left="0";
+    links.style.right="0";
+    links.style.padding="20px";
+    links.style.border="1px solid rgba(255,255,255,.09)";
+    links.style.borderRadius="20px";
+    links.style.background="rgba(8,8,10,.95)";
+    links.style.flexDirection="column";
   }
 
-  message.textContent =
-    "You're on the early-access list! 🚀";
-
-  document.getElementById("email").value = "";
-
-}
+});
 
 </script>
 
