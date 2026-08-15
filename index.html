@@ -1,38 +1,429 @@
-SMIRTZ
-────────────────────────────
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-BUILDING
-WHAT'S NEXT.
+  <title>SMIRTZ — Building What's Next</title>
+  <meta name="description" content="SMIRTZ builds digital products for the next generation.">
 
-We create digital products
-that connect people,
-communities and creativity.
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-[ EXPLORE FEEDZ ]
+    html {
+      scroll-behavior: smooth;
+    }
 
-────────────────────────────
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #050505;
+      color: #ffffff;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
 
-OUR PRODUCT
+    body::before {
+      content: "";
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: #6c35ff;
+      filter: blur(180px);
+      opacity: 0.18;
+      top: -250px;
+      right: -200px;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-FEEDZ
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-One platform.
-Every community.
+    /* NAVBAR */
 
-Videos • Social • Communities
-Creators • Discussions
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5, 5, 5, 0.7);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+    }
 
-[ DISCOVER FEEDZ ]
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
 
-────────────────────────────
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      font-size: 14px;
+      color: #bdbdbd;
+    }
 
-ABOUT SMIRTZ
+    .nav-links a {
+      transition: 0.3s;
+    }
 
-SMIRTZ is a technology company
-focused on building the next
-generation of digital experiences.
+    .nav-links a:hover {
+      color: #ffffff;
+    }
 
-────────────────────────────
+    /* HERO */
 
-SMIRTZ
-© 2026
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 8% 100px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+    }
+
+    .eyebrow {
+      color: #9d9d9d;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: clamp(65px, 11vw, 160px);
+      line-height: 0.88;
+      letter-spacing: -7px;
+      font-weight: 900;
+      margin-bottom: 35px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #8c6cff, #ffffff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s linear infinite;
+    }
+
+    @keyframes gradient {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #a8a8a8;
+      font-size: 19px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .button {
+      display: inline-flex;
+      padding: 15px 25px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(255,255,255,0.15);
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 120px 8%;
+    }
+
+    .section-label {
+      color: #777;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* FEEDZ */
+
+    .feedz-card {
+      position: relative;
+      padding: 70px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.02)
+      );
+      overflow: hidden;
+    }
+
+    .feedz-card::after {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      background: #743cff;
+      filter: blur(150px);
+      opacity: 0.25;
+      right: -100px;
+      bottom: -150px;
+    }
+
+    .feedz-title {
+      font-size: clamp(60px, 10vw, 130px);
+      font-weight: 900;
+      letter-spacing: -5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feedz-description {
+      font-size: 22px;
+      color: #b5b5b5;
+      max-width: 650px;
+      margin: 25px 0 35px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature {
+      padding: 10px 17px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px;
+      color: #d0d0d0;
+      font-size: 14px;
+    }
+
+    /* ABOUT */
+
+    .about {
+      max-width: 1000px;
+    }
+
+    .about h2 {
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 30px;
+    }
+
+    .about p {
+      color: #999;
+      font-size: 20px;
+      max-width: 800px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 50px 8%;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #ffffff;
+      letter-spacing: 3px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 130px 7% 80px;
+      }
+
+      .hero h1 {
+        letter-spacing: -4px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 80px 7%;
+      }
+
+      .feedz-card {
+        padding: 35px 25px;
+        border-radius: 22px;
+      }
+
+      .feedz-title {
+        letter-spacing: -3px;
+      }
+
+      .feedz-description {
+        font-size: 18px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <a href="#" class="logo">SMIRTZ</a>
+
+    <div class="nav-links">
+      <a href="#feedz">FEEDZ</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          TECHNOLOGY COMPANY
+        </div>
+
+        <h1>
+          BUILDING<br>
+          <span class="gradient-text">WHAT'S NEXT.</span>
+        </h1>
+
+        <p>
+          SMIRTZ builds digital products that bring people,
+          communities and creativity together.
+        </p>
+
+        <a href="#feedz" class="button">
+          EXPLORE FEEDZ →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEEDZ -->
+
+    <section id="feedz">
+
+      <div class="section-label">
+        OUR FIRST PRODUCT
+      </div>
+
+      <div class="feedz-card">
+
+        <div class="feedz-title">
+          FEEDZ
+        </div>
+
+        <div class="feedz-description">
+          One place. Every community.
+          A new social experience combining
+          content, creators, conversations and communities.
+        </div>
+
+        <div class="features">
+          <div class="feature">VIDEOS</div>
+          <div class="feature">SOCIAL</div>
+          <div class="feature">COMMUNITIES</div>
+          <div class="feature">CREATORS</div>
+          <div class="feature">DISCUSSIONS</div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+      <div class="section-label">
+        ABOUT SMIRTZ
+      </div>
+
+      <div class="about">
+
+        <h2>
+          We are building
+          the future of
+          digital experiences.
+        </h2>
+
+        <p>
+          SMIRTZ is a technology company focused on creating
+          products that connect people and give communities
+          new ways to create, discover and communicate.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer id="contact">
+
+    <strong>SMIRTZ</strong>
+
+    <span>
+      © 2026 SMIRTZ. All rights reserved.
+    </span>
+
+  </footer>
+
+</body>
+</html>
