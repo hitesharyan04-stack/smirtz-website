@@ -1,429 +1,1145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SMIRTZ — Building What's Next</title>
-  <meta name="description" content="SMIRTZ builds digital products for the next generation.">
+<title>SMIRTZ — Building What's Next</title>
+<meta name="description" content="SMIRTZ builds the next generation of digital experiences.">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-    html {
-      scroll-behavior: smooth;
-    }
+:root{
+  --bg:#030303;
+  --text:#f7f7f7;
+  --muted:#888;
+  --line:rgba(255,255,255,.09);
+  --purple:#8b5cf6;
+  --purple2:#c084fc;
+  --cyan:#67e8f9;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #050505;
-      color: #ffffff;
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body::before {
-      content: "";
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      background: #6c35ff;
-      filter: blur(180px);
-      opacity: 0.18;
-      top: -250px;
-      right: -200px;
-      pointer-events: none;
-      z-index: -1;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
 
-    /* NAVBAR */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-5;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(139,92,246,.12),transparent 25%),
+    radial-gradient(circle at 85% 30%,rgba(103,232,249,.07),transparent 25%),
+    radial-gradient(circle at 50% 90%,rgba(192,132,252,.08),transparent 30%);
+}
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 22px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(5, 5, 5, 0.7);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: 1000;
-    }
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:100;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 4px;
-    }
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      font-size: 14px;
-      color: #bdbdbd;
-    }
+button,input{
+  font:inherit;
+}
 
-    .nav-links a {
-      transition: 0.3s;
-    }
+/* CURSOR GLOW */
 
-    .nav-links a:hover {
-      color: #ffffff;
-    }
+.cursor{
+  position:fixed;
+  width:450px;
+  height:450px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(139,92,246,.13),transparent 65%);
+  transform:translate(-50%,-50%);
+  z-index:-1;
+}
 
-    /* HERO */
+/* NAV */
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 140px 8% 100px;
-      position: relative;
-    }
+nav{
+  position:fixed;
+  top:16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1150px,92%);
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(8,8,8,.65);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  z-index:1000;
+  box-shadow:0 20px 70px rgba(0,0,0,.35);
+}
 
-    .hero-content {
-      max-width: 1000px;
-    }
+.logo{
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:5px;
+}
 
-    .eyebrow {
-      color: #9d9d9d;
-      font-size: 13px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
+.nav-links{
+  display:flex;
+  gap:28px;
+  color:#999;
+  font-size:13px;
+}
 
-    .hero h1 {
-      font-size: clamp(65px, 11vw, 160px);
-      line-height: 0.88;
-      letter-spacing: -7px;
-      font-weight: 900;
-      margin-bottom: 35px;
-    }
+.nav-links a{
+  transition:.3s;
+}
 
-    .gradient-text {
-      background: linear-gradient(90deg, #ffffff, #8c6cff, #ffffff);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient 5s linear infinite;
-    }
+.nav-links a:hover{
+  color:white;
+}
 
-    @keyframes gradient {
-      to {
-        background-position: 200% center;
-      }
-    }
+.nav-cta{
+  padding:10px 17px;
+  border-radius:30px;
+  background:white;
+  color:black;
+  font-size:12px;
+  font-weight:800;
+  transition:.3s;
+}
 
-    .hero p {
-      max-width: 650px;
-      color: #a8a8a8;
-      font-size: 19px;
-      line-height: 1.7;
-      margin-bottom: 40px;
-    }
+.nav-cta:hover{
+  transform:scale(1.05);
+}
 
-    .button {
-      display: inline-flex;
-      padding: 15px 25px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50px;
-      background: #ffffff;
-      color: #000000;
-      font-weight: 700;
-      transition: 0.3s;
-    }
+/* GENERAL */
 
-    .button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 40px rgba(255,255,255,0.15);
-    }
+.container{
+  width:min(1200px,88%);
+  margin:auto;
+}
 
-    /* SECTIONS */
+section{
+  position:relative;
+  padding:150px 0;
+}
 
-    section {
-      padding: 120px 8%;
-    }
+.label{
+  color:#777;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  margin-bottom:25px;
+}
 
-    .section-label {
-      color: #777;
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s cubic-bezier(.16,1,.3,1);
+}
 
-    /* FEEDZ */
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
 
-    .feedz-card {
-      position: relative;
-      padding: 70px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 30px;
-      background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0.02)
-      );
-      overflow: hidden;
-    }
+/* HERO */
 
-    .feedz-card::after {
-      content: "";
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      background: #743cff;
-      filter: blur(150px);
-      opacity: 0.25;
-      right: -100px;
-      bottom: -150px;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding-top:150px;
+}
 
-    .feedz-title {
-      font-size: clamp(60px, 10vw, 130px);
-      font-weight: 900;
-      letter-spacing: -5px;
-      position: relative;
-      z-index: 2;
-    }
+.hero-grid{
+  position:absolute;
+  inset:0;
+  opacity:.13;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
 
-    .feedz-description {
-      font-size: 22px;
-      color: #b5b5b5;
-      max-width: 650px;
-      margin: 25px 0 35px;
-      position: relative;
-      z-index: 2;
-    }
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;
+}
 
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      position: relative;
-      z-index: 2;
-    }
+.orb.one{
+  width:420px;
+  height:420px;
+  background:#6d28d9;
+  opacity:.25;
+  right:-100px;
+  top:100px;
+  animation:float1 9s ease-in-out infinite;
+}
 
-    .feature {
-      padding: 10px 17px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 50px;
-      color: #d0d0d0;
-      font-size: 14px;
-    }
+.orb.two{
+  width:300px;
+  height:300px;
+  background:#0891b2;
+  opacity:.12;
+  left:-100px;
+  bottom:50px;
+  animation:float2 11s ease-in-out infinite;
+}
 
-    /* ABOUT */
+@keyframes float1{
+  50%{transform:translate(-80px,70px) scale(1.2)}
+}
 
-    .about {
-      max-width: 1000px;
-    }
+@keyframes float2{
+  50%{transform:translate(100px,-60px) scale(.8)}
+}
 
-    .about h2 {
-      font-size: clamp(40px, 6vw, 80px);
-      line-height: 1;
-      letter-spacing: -3px;
-      margin-bottom: 30px;
-    }
+.hero-content{
+  position:relative;
+  z-index:2;
+}
 
-    .about p {
-      color: #999;
-      font-size: 20px;
-      max-width: 800px;
-    }
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.035);
+  padding:9px 14px;
+  border-radius:50px;
+  color:#aaa;
+  font-size:11px;
+  margin-bottom:30px;
+  animation:appear .8s ease forwards;
+}
 
-    /* FOOTER */
+.dot{
+  width:7px;
+  height:7px;
+  background:#8b5cf6;
+  border-radius:50%;
+  box-shadow:0 0 15px #8b5cf6;
+  animation:pulse 1.7s infinite;
+}
 
-    footer {
-      padding: 50px 8%;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-      color: #666;
-      font-size: 13px;
-    }
+@keyframes pulse{
+  50%{opacity:.3;transform:scale(.6)}
+}
 
-    footer strong {
-      color: #ffffff;
-      letter-spacing: 3px;
-    }
+.hero h1{
+  max-width:1050px;
+  font-size:clamp(70px,12vw,165px);
+  line-height:.82;
+  letter-spacing:-9px;
+  font-weight:900;
+}
 
-    /* MOBILE */
+.gradient{
+  background:linear-gradient(
+    90deg,
+    #fff 0%,
+    #c4b5fd 35%,
+    #8b5cf6 55%,
+    #fff 80%
+  );
+  background-size:300% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:gradientMove 7s linear infinite;
+}
 
-    @media (max-width: 700px) {
+@keyframes gradientMove{
+  to{background-position:300% center}
+}
 
-      .nav-links {
-        display: none;
-      }
+.hero-desc{
+  max-width:650px;
+  color:#8f8f8f;
+  font-size:18px;
+  line-height:1.8;
+  margin:40px 0;
+}
 
-      .hero {
-        padding: 130px 7% 80px;
-      }
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+}
 
-      .hero h1 {
-        letter-spacing: -4px;
-      }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:52px;
+  padding:0 24px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:white;
+  color:black;
+  font-size:13px;
+  font-weight:800;
+  transition:.35s cubic-bezier(.16,1,.3,1);
+}
 
-      .hero p {
-        font-size: 16px;
-      }
+.btn:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 50px rgba(139,92,246,.18);
+}
 
-      section {
-        padding: 80px 7%;
-      }
+.btn.dark{
+  background:rgba(255,255,255,.035);
+  color:white;
+}
 
-      .feedz-card {
-        padding: 35px 25px;
-        border-radius: 22px;
-      }
+.arrow{
+  transition:.3s;
+}
 
-      .feedz-title {
-        letter-spacing: -3px;
-      }
+.btn:hover .arrow{
+  transform:translateX(5px);
+}
 
-      .feedz-description {
-        font-size: 18px;
-      }
+/* SCROLL INDICATOR */
 
-      footer {
-        flex-direction: column;
-      }
-    }
-  </style>
+.scroll{
+  position:absolute;
+  bottom:35px;
+  left:0;
+  color:#555;
+  font-size:10px;
+  letter-spacing:3px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.scroll-line{
+  width:55px;
+  height:1px;
+  background:#444;
+}
+
+/* MARQUEE */
+
+.marquee{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+  white-space:nowrap;
+  padding:22px 0;
+}
+
+.marquee-track{
+  display:inline-block;
+  animation:marquee 25s linear infinite;
+}
+
+.marquee span{
+  font-size:12px;
+  letter-spacing:5px;
+  color:#555;
+  margin-right:50px;
+}
+
+@keyframes marquee{
+  to{transform:translateX(-50%)}
+}
+
+/* FEEDZ */
+
+.feedz-section{
+  background:
+    radial-gradient(circle at 70% 40%,rgba(139,92,246,.12),transparent 35%);
+}
+
+.feedz-box{
+  position:relative;
+  min-height:650px;
+  border:1px solid var(--line);
+  border-radius:40px;
+  padding:70px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.015));
+  box-shadow:inset 0 1px rgba(255,255,255,.06);
+}
+
+.feedz-box:before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  right:-180px;
+  bottom:-200px;
+  background:#7c3aed;
+  filter:blur(130px);
+  opacity:.25;
+}
+
+.feedz-heading{
+  position:relative;
+  z-index:2;
+  font-size:clamp(80px,13vw,170px);
+  line-height:.8;
+  letter-spacing:-9px;
+  font-weight:900;
+}
+
+.feedz-copy{
+  position:relative;
+  z-index:2;
+  max-width:600px;
+  margin:35px 0;
+  color:#999;
+  font-size:20px;
+  line-height:1.7;
+}
+
+.tags{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-bottom:35px;
+}
+
+.tag{
+  padding:9px 14px;
+  border:1px solid var(--line);
+  border-radius:50px;
+  color:#aaa;
+  background:rgba(255,255,255,.025);
+  font-size:11px;
+  transition:.3s;
+}
+
+.tag:hover{
+  color:white;
+  border-color:rgba(139,92,246,.5);
+  transform:translateY(-3px);
+}
+
+/* PHONE MOCKUP */
+
+.phone{
+  position:absolute;
+  right:80px;
+  top:100px;
+  width:230px;
+  height:450px;
+  border:7px solid #181818;
+  border-radius:35px;
+  background:#080808;
+  box-shadow:
+    0 50px 100px rgba(0,0,0,.7),
+    0 0 60px rgba(139,92,246,.15);
+  transform:rotate(7deg);
+  animation:phoneFloat 5s ease-in-out infinite;
+  overflow:hidden;
+}
+
+@keyframes phoneFloat{
+  50%{transform:rotate(4deg) translateY(-18px)}
+}
+
+.phone-top{
+  height:35px;
+  border-bottom:1px solid #222;
+}
+
+.phone-feed{
+  padding:12px;
+}
+
+.post{
+  height:135px;
+  border-radius:17px;
+  margin-bottom:10px;
+  background:linear-gradient(135deg,#312e81,#7c3aed,#111);
+  position:relative;
+  overflow:hidden;
+}
+
+.post:nth-child(2){
+  background:linear-gradient(135deg,#164e63,#0e7490,#111);
+}
+
+.post:nth-child(3){
+  background:linear-gradient(135deg,#4c1d95,#be185d,#111);
+}
+
+.post:after{
+  content:"FEEDZ";
+  position:absolute;
+  bottom:10px;
+  left:12px;
+  font-weight:900;
+  font-size:12px;
+}
+
+/* WAITLIST */
+
+.waitlist{
+  text-align:center;
+}
+
+.waitlist-card{
+  max-width:850px;
+  margin:auto;
+  padding:80px 50px;
+  border:1px solid var(--line);
+  border-radius:40px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(139,92,246,.15),transparent 45%),
+    rgba(255,255,255,.025);
+}
+
+.waitlist h2{
+  font-size:clamp(50px,8vw,100px);
+  line-height:.9;
+  letter-spacing:-5px;
+  margin-bottom:30px;
+}
+
+.waitlist p{
+  color:#888;
+  max-width:550px;
+  margin:0 auto 35px;
+  line-height:1.7;
+}
+
+.fake-form{
+  display:flex;
+  max-width:550px;
+  margin:auto;
+  padding:6px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#080808;
+}
+
+.fake-form input{
+  min-width:0;
+  flex:1;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:15px;
+}
+
+.fake-form button{
+  border:0;
+  border-radius:13px;
+  padding:0 20px;
+  background:white;
+  color:black;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* REGISTER */
+
+.register-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.register-card{
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:45px;
+  background:rgba(255,255,255,.025);
+  transition:.5s cubic-bezier(.16,1,.3,1);
+}
+
+.register-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(139,92,246,.3);
+}
+
+.register-card h3{
+  font-size:35px;
+  margin-bottom:15px;
+}
+
+.register-card p{
+  color:#888;
+  line-height:1.7;
+  margin-bottom:30px;
+}
+
+/* ABOUT */
+
+.about{
+  max-width:950px;
+}
+
+.about h2{
+  font-size:clamp(48px,7vw,95px);
+  line-height:.95;
+  letter-spacing:-5px;
+  margin-bottom:35px;
+}
+
+.about p{
+  color:#888;
+  font-size:20px;
+  line-height:1.8;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:50px 0;
+}
+
+.footer-inner{
+  width:min(1200px,88%);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#555;
+  font-size:12px;
+}
+
+.footer-logo{
+  color:white;
+  letter-spacing:4px;
+  font-weight:900;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  nav{
+    width:94%;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero h1{
+    letter-spacing:-5px;
+  }
+
+  .feedz-box{
+    padding:45px 28px;
+  }
+
+  .phone{
+    position:relative;
+    right:auto;
+    top:auto;
+    margin:60px auto 0;
+    transform:rotate(4deg);
+  }
+
+  .register-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  section{
+    padding:100px 0;
+  }
+
+  .hero{
+    min-height:900px;
+  }
+
+  .hero h1{
+    font-size:70px;
+  }
+
+  .hero-desc{
+    font-size:16px;
+  }
+
+  .buttons{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .waitlist-card{
+    padding:55px 20px;
+  }
+
+  .waitlist h2{
+    letter-spacing:-3px;
+  }
+
+  .fake-form{
+    flex-direction:column;
+    gap:7px;
+    padding:7px;
+  }
+
+  .fake-form button{
+    height:50px;
+  }
+
+  .register-card{
+    padding:30px;
+  }
+
+  .about h2{
+    letter-spacing:-3px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVIGATION -->
+<div class="cursor"></div>
 
-  <nav>
-    <a href="#" class="logo">SMIRTZ</a>
+<!-- NAV -->
 
-    <div class="nav-links">
-      <a href="#feedz">FEEDZ</a>
-      <a href="#about">ABOUT</a>
-      <a href="#contact">CONTACT</a>
-    </div>
-  </nav>
+<nav>
+
+  <a class="logo" href="#">SMIRTZ</a>
+
+  <div class="nav-links">
+    <a href="#feedz">FEEDZ</a>
+    <a href="#waitlist">WAITLIST</a>
+    <a href="#about">ABOUT</a>
+  </div>
+
+  <a class="nav-cta" href="#register">
+    JOIN FEEDZ
+  </a>
+
+</nav>
 
 
-  <!-- HERO -->
+<!-- HERO -->
 
-  <main>
+<section class="hero">
 
-    <section class="hero">
+  <div class="hero-grid"></div>
 
-      <div class="hero-content">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
 
-        <div class="eyebrow">
-          TECHNOLOGY COMPANY
-        </div>
+  <div class="container">
 
-        <h1>
-          BUILDING<br>
-          <span class="gradient-text">WHAT'S NEXT.</span>
-        </h1>
+    <div class="hero-content">
 
-        <p>
-          SMIRTZ builds digital products that bring people,
-          communities and creativity together.
-        </p>
+      <div class="status">
+        <span class="dot"></span>
+        SMIRTZ IS BUILDING
+      </div>
 
-        <a href="#feedz" class="button">
-          EXPLORE FEEDZ →
+      <div class="label">
+        TECHNOLOGY COMPANY
+      </div>
+
+      <h1>
+        BUILDING<br>
+        <span class="gradient">WHAT'S NEXT.</span>
+      </h1>
+
+      <p class="hero-desc">
+        We build digital products designed to connect
+        people, communities and creativity in completely
+        new ways.
+      </p>
+
+      <div class="buttons">
+
+        <a class="btn" href="#feedz">
+          EXPLORE FEEDZ
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn dark" href="#waitlist">
+          JOIN WAITLIST
         </a>
 
       </div>
 
-    </section>
+    </div>
+
+    <div class="scroll">
+      <span class="scroll-line"></span>
+      SCROLL TO EXPLORE
+    </div>
+
+  </div>
+
+</section>
 
 
-    <!-- FEEDZ -->
+<!-- MARQUEE -->
 
-    <section id="feedz">
+<div class="marquee">
 
-      <div class="section-label">
-        OUR FIRST PRODUCT
+  <div class="marquee-track">
+
+    <span>SMIRTZ</span>
+    <span>BUILD</span>
+    <span>CREATE</span>
+    <span>CONNECT</span>
+    <span>DISCOVER</span>
+    <span>FEEDZ</span>
+
+    <span>SMIRTZ</span>
+    <span>BUILD</span>
+    <span>CREATE</span>
+    <span>CONNECT</span>
+    <span>DISCOVER</span>
+    <span>FEEDZ</span>
+
+  </div>
+
+</div>
+
+
+<!-- FEEDZ -->
+
+<section class="feedz-section" id="feedz">
+
+  <div class="container">
+
+    <div class="label reveal">
+      OUR FIRST PRODUCT
+    </div>
+
+    <div class="feedz-box reveal">
+
+      <div class="feedz-heading">
+        FEEDZ
       </div>
 
-      <div class="feedz-card">
+      <p class="feedz-copy">
+        One place. Every community.
+        Feedz brings videos, creators,
+        social interaction, discussions
+        and communities together.
+      </p>
 
-        <div class="feedz-title">
-          FEEDZ
-        </div>
+      <div class="tags">
 
-        <div class="feedz-description">
-          One place. Every community.
-          A new social experience combining
-          content, creators, conversations and communities.
-        </div>
+        <span class="tag">VIDEOS</span>
+        <span class="tag">CREATORS</span>
+        <span class="tag">SOCIAL</span>
+        <span class="tag">COMMUNITIES</span>
+        <span class="tag">DISCUSSIONS</span>
 
-        <div class="features">
-          <div class="feature">VIDEOS</div>
-          <div class="feature">SOCIAL</div>
-          <div class="feature">COMMUNITIES</div>
-          <div class="feature">CREATORS</div>
-          <div class="feature">DISCUSSIONS</div>
+      </div>
+
+      <a class="btn" href="#waitlist">
+        GET EARLY ACCESS
+        <span class="arrow">→</span>
+      </a>
+
+
+      <!-- APP MOCKUP -->
+
+      <div class="phone">
+
+        <div class="phone-top"></div>
+
+        <div class="phone-feed">
+
+          <div class="post"></div>
+          <div class="post"></div>
+          <div class="post"></div>
+
         </div>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</section>
 
 
-    <!-- ABOUT -->
+<!-- WAITLIST -->
 
-    <section id="about">
+<section class="waitlist" id="waitlist">
 
-      <div class="section-label">
-        ABOUT SMIRTZ
+  <div class="container">
+
+    <div class="waitlist-card reveal">
+
+      <div class="label">
+        FEEDZ IS COMING
       </div>
 
-      <div class="about">
+      <h2>
+        BE THERE<br>
+        FROM DAY ONE.
+      </h2>
 
-        <h2>
-          We are building
-          the future of
-          digital experiences.
-        </h2>
+      <p>
+        Join the early-access list and be among
+        the first people to experience FEEDZ.
+      </p>
+
+      <div class="fake-form">
+
+        <input
+          type="email"
+          placeholder="Enter your email"
+          id="email"
+        >
+
+        <button onclick="joinWaitlist()">
+          JOIN →
+        </button>
+
+      </div>
+
+      <p id="message"
+         style="margin-top:15px;font-size:13px;">
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- REGISTER -->
+
+<section id="register">
+
+  <div class="container">
+
+    <div class="label reveal">
+      YOUR NEXT SOCIAL PLATFORM
+    </div>
+
+    <div class="register-grid">
+
+      <div class="register-card reveal">
+
+        <h3>
+          CREATE.
+        </h3>
 
         <p>
-          SMIRTZ is a technology company focused on creating
-          products that connect people and give communities
-          new ways to create, discover and communicate.
+          Share videos, posts, ideas and
+          moments with the people who
+          actually care about them.
         </p>
+
+        <a class="btn" href="#waitlist">
+          GET EARLY ACCESS →
+        </a>
 
       </div>
 
-    </section>
 
-  </main>
+      <div class="register-card reveal">
+
+        <h3>
+          CONNECT.
+        </h3>
+
+        <p>
+          Find communities, creators and
+          conversations that match your
+          interests.
+        </p>
+
+        <a class="btn dark" href="#waitlist">
+          JOIN FEEDZ →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-  <!-- FOOTER -->
+<!-- ABOUT -->
 
-  <footer id="contact">
+<section id="about">
 
-    <strong>SMIRTZ</strong>
+  <div class="container">
 
-    <span>
-      © 2026 SMIRTZ. All rights reserved.
-    </span>
+    <div class="label reveal">
+      ABOUT SMIRTZ
+    </div>
 
-  </footer>
+    <div class="about reveal">
+
+      <h2>
+        THE INTERNET
+        SHOULD FEEL
+        MORE HUMAN.
+      </h2>
+
+      <p>
+        SMIRTZ is a technology company focused
+        on building products that make digital
+        experiences more creative, social and
+        meaningful.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div class="footer-logo">
+      SMIRTZ
+    </div>
+
+    <div>
+      © 2026 SMIRTZ. Building what's next.
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+/* MOUSE GLOW */
+
+const cursor = document.querySelector(".cursor");
+
+document.addEventListener("mousemove", e => {
+
+  cursor.animate({
+    left: e.clientX + "px",
+    top: e.clientY + "px"
+  },{
+    duration:700,
+    fill:"forwards"
+  });
+
+});
+
+
+/* SCROLL REVEALS */
+
+const observer = new IntersectionObserver(
+  entries => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add("visible");
+
+      }
+
+    });
+
+  },
+  {
+    threshold:.12
+  }
+);
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(el => observer.observe(el));
+
+
+/* WAITLIST DEMO */
+
+function joinWaitlist(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+  if(!email){
+
+    message.textContent =
+      "Please enter your email.";
+
+    return;
+  }
+
+  if(!email.includes("@")){
+
+    message.textContent =
+      "Please enter a valid email.";
+
+    return;
+  }
+
+  message.textContent =
+    "You're on the early-access list! 🚀";
+
+  document.getElementById("email").value = "";
+
+}
+
+</script>
 
 </body>
 </html>
