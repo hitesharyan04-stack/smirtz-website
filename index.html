@@ -1942,54 +1942,69 @@ document.querySelector(".menu")
 
 });
 
-</script>
 <!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
 const SUPABASE_URL = "https://wcmdxpyexgxbvdsahosa.supabase.co";
-const SUPABASE_KEY = sb_publishable_UPqGt9CyLsdVyURd6ZmUrA_wQxW8jBo
-;
+
+const SUPABASE_KEY = "sb_publishable_UPqGt9CyLsdVyURd6ZmUrA_wQxW8jBo
+";
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-const waitlistForm = document.getElementById("waitlist-form");
+
+/* WAITLIST → SUPABASE */
+
+const waitlistForm = document.getElementById("waitlistForm");
 
 if (waitlistForm) {
-  waitlistForm.addEventListener("submit", async function (e) {
+
+  waitlistForm.addEventListener("submit", async function(e) {
+
     e.preventDefault();
 
-    const name = document.getElementById("waitlist-name").value.trim();
-    const email = document.getElementById("waitlist-email").value.trim();
+    const email = document
+      .getElementById("waitEmail")
+      .value
+      .trim();
 
-    if (!name || !email) {
-      alert("Please enter your name and email.");
+    if (!email) {
+      alert("Please enter your email.");
       return;
     }
 
-    const { error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from("waitlist")
       .insert([
         {
-          name: name,
           email: email
         }
       ]);
 
     if (error) {
-      console.error(error);
-      alert("Something went wrong. Please try again.");
+
+      console.error("SUPABASE ERROR:", error);
+
+      alert("Something went wrong: " + error.message);
+
       return;
     }
 
-    alert("You're on the SMIRTZ waitlist 🚀");
+    document.getElementById("waitSuccess").style.display = "block";
 
-    waitlistForm.reset();
+    document.getElementById("waitEmail").value = "";
+
+    console.log("Email saved:", email);
+
   });
+
 }
+
 </script>
 </body>
 </html>
